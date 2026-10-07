@@ -1,13 +1,16 @@
 {
-  "turma": "12DTAT",
-  "grupo": "Grupo 00",
+  "turma": "2DTATBB",
+  "grupo": "Grupo 05",
   "integrantes": [
-    { "nome": "Nome Completo do Integrante", "rm": "RM000000" },
-    { "nome": "Nome Completo do Integrante", "rm": "RM000000" }
+    { "nome": "Natália Diniz Figueiredo Ramiro", "rm": "RM377771" },
+    { "nome": "Marcia Paula Soares Vieira", "rm": "RM377740" },
+    { "nome": "Marcos Yuiichi Gomes Okada", "rm": "RM377783" },
+    { "nome": "Milton Cardoso de Paula Junior", "rm": "RM377780" },
+    { "nome": "Zildomar Aranha de Carvalho Filho", "rm": "RM377759" }
   ],
   "links": {
-    "repositorio": "https://github.com/usuario/nome-do-repositorio",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "apresentacao": "https://github.com/usuario/nome-do-repositorio/blob/main/docs/apresentacao_executiva.pdf"
+    "repositorio": "https://github.com/markosokada/FIAP-Fase2-Desafio.git",
+    "video": "https://youtu.be/McV35SpMYVY",
+    "apresentacao": "https://github.com/markosokada/FIAP-Fase2-Desafio/blob/main/docs/Apresentacao%20_Vers%C3%A3o_Final.pdf"
   }
 }
