@@ -20,7 +20,7 @@
 |---|---|---|
 |Natália Diniz Figueiredo Ramiro  |rm377771|natydfr@gmail.com          |
 |Marcia Paula Soares Vieira       |rm377740|marciapaulasv@gmail.com    |
-|Marcos Yuiichi Gomes Okada       |rm377783|marcosokada@bb.com.br      |
+|Marcos Yuiichi Gomes Okada       |rm377783|marcosokada@gmail.com.br   |
 |Milton Cardoso de Paula Junior   |rm377780|milton.is.kauztik@gmail.com|
 |Zildomar Aranha de Carvalho Filho|rm377759|zildoaranha@gmail.com      |
 
@@ -211,6 +211,7 @@ exatamente os números da seção 5.
 | Random Forest          | 0.80 | 0.32 | 0.63 | 0.43 |
 | Support Vector Machine | 0.67 | 0.18 | 0.53 | 0.27 |
 
+
 Modelo escolhido: **Random Forest** (Campeão com média de F1-Score de 0,4035).
 Métricas priorizadas: **F1-Score** (Equilíbrio entre Precisão e Recall). Algoritmos lineares (**Regressão Logística**) e de distância (**SVM**) até alcançaram um bom Recall, mas geraram falsos alarmes excessivos, o que barraria clientes legítimos. O Random Forest contornou esse problema ao mapear com precisão os padrões não-lineares do cadastro, oferecendo a melhor proteção contra a inadimplência sem sufocar a operação comercial do banco.
 ---
@@ -253,21 +254,21 @@ Nenhum modelo preditivo é uma ferramenta perfeita e imune a falhas. Expor as li
 
 As principais limitações identificadas neste ciclo de desenvolvimento, bem como as estratégias recomendadas para superá-las em iterações futuras, são descritas a seguir:
 
-    A) Natureza Estática e Autorreferencial dos Dados (A Ausência de Reguladores de Crédito)
+A) Natureza Estática e Autorreferencial dos Dados (A Ausência de Reguladores de Crédito)
 A maior fragilidade estrutural do modelo atual reside na origem estática das variáveis preditivas. O algoritmo tomou decisões de risco baseando-se estritamente em um formulário cadastral preenchido pelo próprio cliente no momento da solicitação (como idade, renda declarada e estado civil).
 
         • O Impacto: O modelo opera "às cegas" em relação ao comportamento financeiro de mercado em tempo real. Ele não possui acesso à pontuação do cliente em birôs de crédito externos (como Serasa, SPC ou Boa Vista) e, mais criticamente, não captura o histórico de restrições ou o endividamento sistêmico do cidadão registrado no Sistema de Informações de Crédito (SCR) do Banco Central.
-        
+
         • O Próximo Passo: Em uma segunda fase do projeto, é mandatório integrar o pipeline a APIs de reguladores de crédito tradicionais e dados de Open Finance. Adicionar variáveis como o histórico de negativações recentes, a taxa de utilização de limite de cartões de terceiros e o volume de consultas recentes ao CPF blindará o modelo contra fraudes de declaração e elevará drasticamente a precisão da ferramenta.
 
-    B) Desafio de Classes Raras e Alta Cardinalidade em Profissões (OCCUPATION_TYPE)
+B) Desafio de Classes Raras e Alta Cardinalidade em Profissões (OCCUPATION_TYPE)
 Conforme mapeado na fase de Análise Exploratória (EDA), a base fundida sofre de uma severa cauda de alta cardinalidade e amostras microscópicas em certas ocupações (como as equipes de TI e RH, que contam com uma volumetria reduzida no universo de teste).
 
         • O Impacto: O algoritmo Random Forest pode sofrer de superajuste (overfitting) ao criar ramificações específicas e profundas para esses microgrupos profissionais. O modelo corre o risco de "decorar" o comportamento de pouquíssimos indivíduos daquela profissão, perdendo a capacidade de generalizar o risco de forma justa quando um novo profissional de tecnologia ou recursos humanos solicitar um cartão de crédito.
 
         • O Próximo Passo: Para contornar essa limitação, deve-se aplicar uma etapa de reagrupamento socioeconômico estruturado. Em vez de operar com 18 profissões isoladas, os registros devem ser consolidados em 4 ou 5 grandes macro-grupos baseados em faixas salariais homogêneas de mercado e estabilidade jurídica — por exemplo: Corporativo Técnico, Operacional de Risco, Administrativo Estável e Autônomos.
 
-    C) Restrição Algorítmica e Falta de Otimização de Hiperparâmetros
+C) Restrição Algorítmica e Falta de Otimização de Hiperparâmetros
 O ciclo de modelagem atual cumpriu a exigência de testar múltiplos classificadores sob validação cruzada robusta, alcançando um F1-Score médio de 0,4035 no classificador campeão. Contudo, o algoritmo Random Forest foi treinado utilizando seus parâmetros estruturais padrão (baseline).
 
         • O Impacto: O modelo pode estar operando em uma zona de subotimização. Sem um ajuste fino, o equilíbrio entre a captura de inadimplentes (Recall) e o veto a clientes saudáveis (Precisão) fica limitado ao comportamento padrão do estimador.
